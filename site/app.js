@@ -9,14 +9,14 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const bodyParser = require("body-parser");
 
 const userRouter = require("./routes/users");
-const hobbyRouter = require("./routes/hobbies");
+const newsRouter = require("./routes/news");
 
 // Database
 const db = require("./util/database");
 const passport = require("passport");
 
 const User = require("./models/user");
-const Hobby = require("./models/hobby");
+const News = require("./models/news");
 
 const initPassport = require("./util/passport-config");
 initPassport(passport);
@@ -32,6 +32,8 @@ app.use(passport.initialize());
 app.use(
   session({
     secret: "MySecret",
+    resave: true,
+    saveUninitialized: true,
     store: new SequelizeStore({
       db: db,
     }),
@@ -62,11 +64,8 @@ app.use((req, res, next) => {
 //     .catch((err) => console.log(err));
 // });
 
-app.use(hobbyRouter);
+app.use(newsRouter);
 app.use(userRouter);
-
-Hobby.belongsTo(User);
-User.hasMany(Hobby);
 
 db.sync()
   .then(() => {

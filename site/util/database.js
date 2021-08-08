@@ -11,7 +11,7 @@
 
 const { Sequelize } = require("sequelize");
 
-module.exports = new Sequelize("backend-workshop", "root", "Thats-it", {
+module.exports = new Sequelize("forests", "root", "samaromar1998", {
   host: "localhost",
   dialect: "mysql",
 });

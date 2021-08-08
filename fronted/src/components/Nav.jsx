@@ -8,6 +8,7 @@ const Nav = () => {
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="sign-up">Sing Up</Link></li>
                     <li><Link to="sign-in">Sign In</Link></li>
+                    <li><Link to="news">News</Link></li>
                 </ul>
             </nav>
         </header>

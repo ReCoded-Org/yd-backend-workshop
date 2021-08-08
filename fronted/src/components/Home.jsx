@@ -12,6 +12,7 @@ const Home = (userData) => {
   };
 
   useEffect(() => {
+    console.log(userData)
     const fetchHobbies = async () => {
       const data = await fetch("http://localhost:3001/get-hobby", {
         headers: {

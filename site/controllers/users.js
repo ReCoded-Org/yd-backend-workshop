@@ -30,7 +30,7 @@ exports.postSignUp = async (req, res, next) => {
     await user.save();
     res.send(user);
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).send(err) ;
   }
 };
 
