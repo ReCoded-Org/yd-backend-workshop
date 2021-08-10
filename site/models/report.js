@@ -1,8 +1,8 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../util/database");
 
-const Hobby = db.define(
-  "hobbies",
+const Report = db.define(
+  "reports",
   {
     // Model attributes are defined here
     id: {
@@ -10,11 +10,15 @@ const Hobby = db.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    title: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    imgUrl: {
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    date: {
       type: DataTypes.STRING,
     },
     description: {
@@ -26,4 +30,4 @@ const Hobby = db.define(
   }
 );
 
-module.exports = Hobby;
+module.exports = Report;

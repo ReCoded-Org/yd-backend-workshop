@@ -30,7 +30,7 @@ function SignUn({ handleFetch }) {
       const data = await fetchResponse.json();
       console.log(data);
       handleFetch(data.user);
-      history.push("/");
+      history.push("/")
       return data;
     } catch (e) {
       return e;

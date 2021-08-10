@@ -7,11 +7,15 @@ const Home = (userData) => {
     description: "",
   });
   const [hobbies, setHobbies] = useState(null);
+  
+  const [allReports, setAllReports] = useState([]);
+  const [allNews, setAllNews] = useState([]);
   const handlChange = (e) => {
     setHobby({ ...hobby, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
+    console.log(userData)
     const fetchHobbies = async () => {
       const data = await fetch("http://localhost:3001/get-hobby", {
         headers: {
@@ -21,7 +25,19 @@ const Home = (userData) => {
       const hobbies = await data.json();
       setHobbies(hobbies);
     };
-    fetchHobbies();
+    const fetchReports = async () => {
+      const data = await fetch("http://localhost:3001/get-report");
+      const reports = await data.json();
+      setAllReports(reports);
+    };
+    fetchReports();
+    const fetchNews = async () => {
+      const data = await fetch("http://localhost:3001/get-news");
+      const news = await data.json();
+      console.log("news", news)
+      setAllNews(news);
+    };
+    fetchNews();
   }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,58 +63,57 @@ const Home = (userData) => {
   };
   return (
     <div>
+      <div className="jumbatron">
+
+</div>
       {userData.firstName ? (
         <div>
           <h1>Welcome {userData.firstName}</h1>
-          {hobbies ? (
+          
+          
+        </div>
+      ) : (
+        <div>
+          <h1>Please sign in</h1>
+          
+          {allReports.length > 0 ? (
             <div>
-              <h3>Your Hobbies</h3>
+              <h3>Reports</h3>
               <ul>
-                {hobbies.map((hobby) => (
-                  <li>{hobby.title}</li>
+                {allReports.map((n) => (
+                  <div>
+                    <h1>{n.Location}</h1>
+                    <p>{n.description}</p>
+                    <p>{n.date}</p>
+                    <p>Reported by: {n.name}</p>
+                  </div>
                 ))}
               </ul>
             </div>
           ) : (
-            <h3>You have no hobbies yet</h3>
+            <h3>No reports yet</h3>
           )}
-          <h3>Add new hobby</h3>
-          <form onSubmit={handleSubmit}>
+
+{allReports.length > 0 ? (
             <div>
-              <label htmlFor="firstName">
-                Title
-                <input
-                  type="text"
-                  name="title"
-                  required
-                  value={hobby.title}
-                  onChange={handlChange}
-                />
-              </label>
-              <label htmlFor="imgUrl">
-                Image Url
-                <input
-                  type="text"
-                  name="imgUrl"
-                  value={hobby.imageUrl}
-                  onChange={handlChange}
-                />
-              </label>
-              <label htmlFor="password">
-                Description
-                <input
-                  type="description"
-                  name="description"
-                  value={hobby.description}
-                  onChange={handlChange}
-                />
-              </label>
+              <h3>News</h3>
+              <ul>
+                {allNews.map((n) => {
+               
+                return(
+                  
+                  <div>
+                    <h5>{n.title}</h5>
+                    <p>{n.description}</p>
+                    <p>{n.date}</p>
+                  </div>
+                )})}
+              </ul>
             </div>
-            <button type="submit">Submit</button>
-          </form>
+          ) : (
+            <h3>No news yet</h3>
+          )}
         </div>
-      ) : (
-        <h1>Please sign in</h1>
       )}
     </div>
   );

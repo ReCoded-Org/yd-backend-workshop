@@ -16,3 +16,19 @@ li {
   list-style: none;
 }
 
+.jumbatron {
+  height: 100vh;
+  background: url("https://magazine.columbia.edu/sites/default/files/styles/wysiwyg_full_width_image/public/2018-09/Wild-fires.jpg?itok=pBKjTId4") no-repeat fixed center;
+  background-size: cover;
+}
+
+.navLink {
+  text-decoration: none;
+}
+
+nav ul {
+  margin: 0px;
+  padding: 1em 0em;
+  background-color: rgb(19, 4, 4);
+}
+
